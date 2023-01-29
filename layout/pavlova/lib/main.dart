@@ -12,14 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
         body: (Center(
             child: Container(
           padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Column(
-            children: [rating(), iconList()],
+            children: [_title(), _text(), rating(), iconList()],
           ),
         ))),
       ),
@@ -93,4 +90,20 @@ Widget iconList() => Container(
           ],
         ),
       ]),
+    );
+
+Widget _title() => const Text(
+      'Strawberry Pavlova',
+      style: TextStyle(
+        fontWeight: FontWeight.w800,
+        letterSpacing: 0.5,
+        fontSize: 30,
+      ),
+    );
+
+Widget _text() => const Text(
+      'Pavlova is a meringue-based dessert named after the Russian ballerina '
+      'Anna Pavlova. Pavlova features a crisp crust and soft, light inside, '
+      'topped with fruit and whipped cream.',
+      softWrap: true,
     );
