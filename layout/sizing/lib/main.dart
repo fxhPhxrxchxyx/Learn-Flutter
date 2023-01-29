@@ -30,6 +30,7 @@ Widget _buildRow() => Row(
           child: Image.asset('images/pic1.jpg'),
         ),
         Expanded(
+          flex: 2,
           child: Image.asset('images/pic2.jpg'),
         ),
         Expanded(
