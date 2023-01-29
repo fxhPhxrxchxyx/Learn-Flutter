@@ -15,8 +15,16 @@ class MyApp extends StatelessWidget {
         body: (Center(
             child: Container(
           padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-          child: Column(
-            children: [_title(), _text(), rating(), iconList()],
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: leftColumn,
+              ),
+              Expanded(
+                child: mainImage,
+              ),
+            ],
           ),
         ))),
       ),
@@ -107,3 +115,19 @@ Widget _text() => const Text(
       'topped with fruit and whipped cream.',
       softWrap: true,
     );
+final mainImage = Image.asset(
+  'images/pavlova.jpg',
+  fit: BoxFit.cover,
+);
+
+final leftColumn = Container(
+  padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+  child: Column(
+    children: [
+      _title(),
+      _text(),
+      rating(),
+      iconList(),
+    ],
+  ),
+);
