@@ -37,7 +37,7 @@ class MyAppState extends ChangeNotifier {
       onPressed: () {
         appState.getNext(); // ← This instead of print().
       },
-      child: Text('Next'),
+      child: const Text('Next'),
     );
   }
 }
@@ -55,8 +55,8 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('A random AWESOME idea:'),
             BigCard(pair: pair),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 appState.getNext();
