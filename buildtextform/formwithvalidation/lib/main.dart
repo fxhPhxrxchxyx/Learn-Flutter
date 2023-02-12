@@ -41,47 +41,68 @@ class _MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: Text('Name')),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter some search text',
+              ),
+            ),
+          ),
           //to validate form if it is empty
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Enter your name',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Enter your name',
+              ),
+              validator: (value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                  return 'Please enter only text';
+                }
+                return null;
+              },
             ),
-            validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                return 'Please enter only text';
-              }
-              return null;
-            },
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Enter your student id',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Enter your student id',
+              ),
+              validator: (value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                        .hasMatch(value)) {
+                  return 'Please enter your student id';
+                }
+                return null;
+              },
             ),
-            validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
-                      .hasMatch(value)) {
-                return 'Please enter your student id';
-              }
-              return null;
-            },
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Enter your email',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Enter your email',
+              ),
+              validator: (value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value)) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
             ),
-            validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                      .hasMatch(value)) {
-                return 'Please enter your email';
-              }
-              return null;
-            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
