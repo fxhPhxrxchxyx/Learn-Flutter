@@ -83,6 +83,18 @@ class _MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')));
+                }
+              },
+              child: const Text('Submit'),
+            ),
+          ),
         ],
       ),
     );
