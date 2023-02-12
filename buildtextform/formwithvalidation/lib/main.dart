@@ -1,0 +1,90 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const appTitle = 'Form Validation Demo';
+
+    return MaterialApp(
+      title: appTitle,
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text(appTitle),
+          ),
+          body: const Center(
+            child: MyCustomForm(),
+          )),
+    );
+  }
+}
+
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
+
+  @override
+  State<MyCustomForm> createState() => _MyCustomFormState();
+}
+
+class _MyCustomFormState extends State<MyCustomForm> {
+  //set key for form
+  final _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //to validate form if it is empty
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Enter your name',
+            ),
+            validator: (value) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                return 'Please enter only text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Enter your student id',
+            ),
+            validator: (value) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                      .hasMatch(value)) {
+                return 'Please enter your student id';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Enter your email',
+            ),
+            validator: (value) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                      .hasMatch(value)) {
+                return 'Please enter your email';
+              }
+              return null;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
