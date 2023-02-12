@@ -80,16 +80,22 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
         ),
         //to show the value of the text field in the alert dialog
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          //to focus on the next text field
-          myFocusNode.requestFocus();
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text(myController.text),
-                );
-              });
-        }));
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            //to focus on the next text field
+            myFocusNode.requestFocus();
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(myController.text),
+                  );
+                });
+          },
+          //tooltip show when hover the button
+          tooltip: 'Show me the value!',
+          //icon inside the button
+          child: const Icon(Icons.text_fields),
+        ));
   }
 }
