@@ -6,11 +6,14 @@ final GlobalKey<ProductListWidgetState> productList =
     GlobalKey<ProductListWidgetState>();
 
 void main() {
+  // TODO: insert AppStateWidget above MaterialApp.
   runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Store',
-      home: MyStorePage(),
+    const AppStateWidget(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Store',
+        home: MyStorePage(),
+      ),
     ),
   );
 }
