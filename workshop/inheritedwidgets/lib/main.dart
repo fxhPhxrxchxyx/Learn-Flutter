@@ -39,16 +39,20 @@ class AppState {
 
 //step 3 create own InheritedWidget to host the data
 class AppStateScope extends InheritedWidget {
+  //create constructor
   const AppStateScope(this.data, {Key? key, required Widget child})
       : super(key: key, child: child);
 
   final AppState data;
 
   static AppState of(BuildContext context) {
+    //1 to get the data from the inherited widget and return that inherited widget
+    //2 notifiy the widgets that the data has changed
     return context.dependOnInheritedWidgetOfExactType<AppStateScope>()!.data;
   }
 
   @override
+  //update the state when the data changes
   bool updateShouldNotify(AppStateScope oldWidget) {
     return data != oldWidget.data;
   }
