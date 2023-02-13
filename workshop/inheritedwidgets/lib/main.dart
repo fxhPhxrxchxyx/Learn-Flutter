@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-final GlobalKey<ShoppingCartIconState> shoppingCart =
-    GlobalKey<ShoppingCartIconState>();
 final GlobalKey<ProductListWidgetState> productList =
     GlobalKey<ProductListWidgetState>();
 
@@ -186,7 +184,7 @@ class MyStorePageState extends State<MyStorePage> {
                   onPressed: _toggleSearch,
                   icon: const Icon(Icons.search, color: Colors.black),
                 ),
-              ShoppingCartIcon(key: shoppingCart),
+              const ShoppingCartIcon(),
             ],
             backgroundColor: Colors.white,
             pinned: true,
@@ -200,24 +198,13 @@ class MyStorePageState extends State<MyStorePage> {
   }
 }
 
-class ShoppingCartIcon extends StatefulWidget {
+// TODO: convert ShoppingCartIcon into StatelessWidget.
+class ShoppingCartIcon extends StatelessWidget {
   const ShoppingCartIcon({Key? key}) : super(key: key);
-  @override
-  ShoppingCartIconState createState() => ShoppingCartIconState();
-}
-
-class ShoppingCartIconState extends State<ShoppingCartIcon> {
-  Set<String> get itemsInCart => _itemsInCart;
-  Set<String> _itemsInCart = <String>{};
-  set itemsInCart(Set<String> value) {
-    setState(() {
-      _itemsInCart = value;
-      // to show number of products that are in the cart
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final Set<String> itemsInCart = AppStateScope.of(context).itemsInCart;
     final bool hasPurchase = itemsInCart.isNotEmpty;
     return Stack(
       alignment: Alignment.center,
@@ -275,12 +262,10 @@ class ProductListWidgetState extends State<ProductListWidget> {
 
   void _handleAddToCart(String id) {
     itemsInCart = _itemsInCart..add(id);
-    shoppingCart.currentState!.itemsInCart = itemsInCart;
   }
 
   void _handleRemoveFromCart(String id) {
     itemsInCart = _itemsInCart..remove(id);
-    shoppingCart.currentState!.itemsInCart = itemsInCart;
   }
 
   Widget _buildProductTile(String id) {
