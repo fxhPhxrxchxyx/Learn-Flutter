@@ -26,10 +26,13 @@ class AppState {
   final List<String> productList;
   final Set<String> itemsInCart;
 
-  AppState copyWith(List<String>? productList, Set<String>? itemsInCart) {
-    // TODO: implement copy method.
-    // duplicate the state obj with new properties (user can upadte one of the properties)
-    //?? if the new property is null then use the old one
+  AppState copyWith({
+    List<String>? productList,
+    Set<String>? itemsInCart,
+  })
+  // duplicate the state obj with new properties (user can upadte one of the properties)
+  //?? if the new property is null then use the old one
+  {
     return AppState(
       productList: productList ?? this.productList,
       itemsInCart: itemsInCart ?? this.itemsInCart,
@@ -55,6 +58,70 @@ class AppStateScope extends InheritedWidget {
   //update the state when the data changes
   bool updateShouldNotify(AppStateScope oldWidget) {
     return data != oldWidget.data;
+  }
+}
+
+class AppStateWidget extends StatefulWidget {
+  const AppStateWidget({required this.child, Key? key}) : super(key: key);
+  final Widget child;
+  static AppStateWidgetState of(BuildContext context) {
+    // TODO: implement this method
+    return context.findAncestorStateOfType<AppStateWidgetState>()!;
+  }
+
+  @override
+  State<AppStateWidget> createState() => AppStateWidgetState();
+}
+
+class AppStateWidgetState extends State<AppStateWidget> {
+  AppState _data = AppState(
+    productList: Server.getProductList(),
+  );
+
+  void setProductList(List<String> newProductList) {
+    // TODO: implement this method
+    if (newProductList != _data.productList) {
+      setState(() {
+        _data = _data.copyWith(
+          productList: newProductList,
+        );
+      });
+    }
+  }
+
+  void addToCart(String id) {
+    // TODO: implement this method
+    if (!_data.itemsInCart.contains(id)) {
+      final Set<String> newItemsInCart = Set<String>.from(_data.itemsInCart);
+      newItemsInCart.add(id);
+      setState(() {
+        _data = _data.copyWith(
+          itemsInCart: newItemsInCart,
+        );
+      });
+    }
+  }
+
+  void removeFromCart(String id) {
+    // TODO: implement this method
+    if (_data.itemsInCart.contains(id)) {
+      final Set<String> newItemsInCart = Set<String>.from(_data.itemsInCart);
+      newItemsInCart.remove(id);
+      setState(() {
+        _data = _data.copyWith(
+          itemsInCart: newItemsInCart,
+        );
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement this method
+    return AppStateScope(
+      _data,
+      child: widget.child,
+    );
   }
 }
 
