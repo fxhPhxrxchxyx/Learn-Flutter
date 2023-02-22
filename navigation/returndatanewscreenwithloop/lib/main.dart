@@ -8,8 +8,8 @@ void main() {
         todos: List.generate(
           20,
           (i) => Todo(
-            'Todo $i',
-            'A description of what needs to be done for Todo $i',
+            'Todo ${i + 1}',
+            'A factorial of Todo ${i + 1} is ${factorial(i + 1)}',
           ),
         ),
       ),
@@ -25,14 +25,14 @@ class Todo {
   const Todo(this.title, this.description);
 }
 
-//Generate the list of todos
-final todos = List.generate(
-  20,
-  (i) => Todo(
-    'Todo $i',
-    'A description of what needs to be done for Todo $i',
-  ),
-);
+//function factorial
+int factorial(int i) {
+  if (i == 0 || i == 1) {
+    return 1;
+  } else {
+    return i * factorial(i - 1);
+  }
+}
 
 class TodoScreen extends StatelessWidget {
   const TodoScreen({super.key, required this.todos});
